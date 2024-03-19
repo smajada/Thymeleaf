@@ -53,9 +53,9 @@ class DemoApplicationTests {
 
 		Estudiante response = estudianteServicio.getEstudianteporId(2L);
 
-		System.out.println(estudianteList);
-		System.out.println(estudianteList.get(1));
-		System.out.println(response);
+//		System.out.println(estudianteList);
+//		System.out.println(estudianteList.get(1));
+//		System.out.println(response);
 
         assertNotNull(response);
 		assertEquals(estudianteList.get(1), response);
