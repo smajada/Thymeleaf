@@ -2,19 +2,18 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         lang="en">
-
 <head th:replace="~{layout :: head}"></head>
-
 <body>
+
 <nav th:replace="~{layout :: navbar}"></nav>
 
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
-            <h1 class="text-center">Editar estudiantes</h1>
+            <h1 class="text-center">Registro de estudiantes</h1>
             <div class="card-body">
-                <!--/*@thymesVar id="id" type="estudiante.id"*/-->
-                <form th:action="@{/estudiantes/{id}(id=${estudiante.id})}" th:object="${estudiante}" method="post">
+                <!--/*@thymesVar id="trabajador" type="Trabajador"*/-->
+                <form th:action="@{/trabajadores}" th:object="${trabajador}" method="post">
 
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>

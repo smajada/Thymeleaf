@@ -1,8 +1,8 @@
 package com.smajada.thymeleaf.demo;
 
-import com.smajada.thymeleaf.demo.entities.Estudiante;
+import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.repository.EstudianteRepository;
-import com.smajada.thymeleaf.demo.service.EstudianteServicio;
+import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,75 +24,75 @@ class DemoApplicationTests {
 	EstudianteRepository estudianteRepository;
 
 	@InjectMocks
-	EstudianteServicio estudianteServicio;
+	TrabajadorServicio trabajadorServicio;
 
 	@Test
 	void shouldListAllEstudiantes(){
-		List<Estudiante> estudianteList = new ArrayList<>();
+		List<Trabajador> trabajadorList = new ArrayList<>();
 
-		Estudiante estudiante1 = new Estudiante(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
-		estudianteList.add(estudiante1);
-		estudianteList.add(new Estudiante(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		estudianteList.add(new Estudiante(3L, "Carmelo", "Parco", "cparco@gmail.com"));
+		Trabajador trabajador1 = new Trabajador(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		trabajadorList.add(trabajador1);
+		trabajadorList.add(new Trabajador(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
+		trabajadorList.add(new Trabajador(3L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		when(estudianteRepository.findAll()).thenReturn(estudianteList);
+		when(estudianteRepository.findAll()).thenReturn(trabajadorList);
 
-		List<Estudiante> response = estudianteServicio.listAllEstudiantes();
+		List<Trabajador> response = trabajadorServicio.listAllTrabajadores();
 
 		assertFalse(response.isEmpty());
-		assertEquals(estudiante1, response.get(0));
+		assertEquals(trabajador1, response.get(0));
 	}
 
 	@Test
 	void shouldGetEstudianteById(){
-		List<Estudiante> estudianteList = new ArrayList<>();
-		estudianteList.add(new Estudiante(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		estudianteList.add(new Estudiante(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+		List<Trabajador> trabajadorList = new ArrayList<>();
+		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
+		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		when(estudianteRepository.getReferenceById(2L)).thenReturn(estudianteList.get(1));
+		when(estudianteRepository.getReferenceById(2L)).thenReturn(trabajadorList.get(1));
 
-		Estudiante response = estudianteServicio.getEstudianteporId(2L);
+		Trabajador response = trabajadorServicio.getTrabajadorporId(2L);
 
 //		System.out.println(estudianteList);
 //		System.out.println(estudianteList.get(1));
 //		System.out.println(response);
 
         assertNotNull(response);
-		assertEquals(estudianteList.get(1), response);
+		assertEquals(trabajadorList.get(1), response);
 	}
 
 	@Test
 	void shouldSaveEstudiante(){
-		 Estudiante estudiante3 = new Estudiante(3L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		 Trabajador trabajador3 = new Trabajador(3L, "Juan", "Aguilera", "jaguilera@gmail.com");
 
-		when(estudianteRepository.save(estudiante3)).thenReturn(estudiante3);
+		when(estudianteRepository.save(trabajador3)).thenReturn(trabajador3);
 
-		Estudiante response = estudianteServicio.guardarEstudiante(estudiante3);
+		Trabajador response = trabajadorServicio.guardarTrabajadores(trabajador3);
 
 		assertNotNull(response);
-		assertEquals(estudiante3, response);
+		assertEquals(trabajador3, response);
 	}
 
 	@Test
-	void shouldUpdateEstudiante(){
-		List<Estudiante> estudianteList = new ArrayList<>();
-		estudianteList.add(new Estudiante(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		estudianteList.add(new Estudiante(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+	void shouldUpdateTrabajador(){
+		List<Trabajador> trabajadorList = new ArrayList<>();
+		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
+		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		Estudiante estudianteUpdated = new Estudiante(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		Trabajador trabajadorUpdated = new Trabajador(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
 
-		estudianteServicio.actualizarEstudiante(estudianteUpdated);
+		trabajadorServicio.actualizarTrabajador(trabajadorUpdated);
 
-		verify(estudianteRepository).save(estudianteUpdated);
+		verify(estudianteRepository).save(trabajadorUpdated);
 	}
 
 	@Test
-	void shouldDeleteEstudiante(){
-		List<Estudiante> estudianteList = new ArrayList<>();
-		estudianteList.add(new Estudiante(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		estudianteList.add(new Estudiante(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+	void shouldDeleteTrabajador(){
+		List<Trabajador> trabajadorList = new ArrayList<>();
+		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
+		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		estudianteServicio.eliminarEstudiante(1L);
+		trabajadorServicio.eliminarTrabajador(1L);
 
 		verify(estudianteRepository).deleteById(1L);
 	}
