@@ -32,24 +32,24 @@ class DemoApplicationTests {
 	void shouldListAllEstudiantes(){
 		List<Trabajador> trabajadorList = new ArrayList<>();
 
-		Trabajador trabajador1 = new Trabajador(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
-		trabajadorList.add(trabajador1);
-		trabajadorList.add(new Trabajador(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		trabajadorList.add(new Trabajador(3L, "Carmelo", "Parco", "cparco@gmail.com"));
+		Trabajador comercial = new Comercial(1L, "Juan", "Aguilera", "jaguilera@gmail.com", 20);
+		trabajadorList.add(comercial);
+		trabajadorList.add(new Comercial(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com", 20));
+		trabajadorList.add(new Administrativo(3L, "Carmelo", "Parco", "cparco@gmail.com", "Marketing"));
 
 		when(trabajadorRepository.findAll()).thenReturn(trabajadorList);
 
 		List<Trabajador> response = trabajadorServicio.listAllTrabajadores();
 
 		assertFalse(response.isEmpty());
-		assertEquals(trabajador1, response.get(0));
+		assertEquals(comercial, response.get(0));
 	}
 
 	@Test
 	void shouldGetEstudianteById(){
 		List<Trabajador> trabajadorList = new ArrayList<>();
-		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+		trabajadorList.add(new Comercial(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com", 20));
+		trabajadorList.add(new Administrativo(3L, "Carmelo", "Parco", "cparco@gmail.com", "Marketing"));
 
 		when(trabajadorRepository.getReferenceById(2L)).thenReturn(trabajadorList.get(1));
 
@@ -65,7 +65,7 @@ class DemoApplicationTests {
 
 	@Test
 	void shouldSaveEstudiante(){
-		 Trabajador trabajador3 = new Trabajador(3L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		 Trabajador trabajador3 = new Administrativo(3L, "Carmelo", "Parco", "cparco@gmail.com", "Marketing");
 
 		when(trabajadorRepository.save(trabajador3)).thenReturn(trabajador3);
 
@@ -78,10 +78,10 @@ class DemoApplicationTests {
 	@Test
 	void shouldUpdateTrabajador(){
 		List<Trabajador> trabajadorList = new ArrayList<>();
-		trabajadorList.add(new Comercial(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		trabajadorList.add(new Administrativo(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+		trabajadorList.add(new Comercial(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com", 20));
+		trabajadorList.add(new Administrativo(3L, "Carmelo", "Parco", "cparco@gmail.com", "Marketing"));
 
-		Comercial trabajadorUpdated = new Comercial(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		Administrativo trabajadorUpdated = new Administrativo(3L, "Juan", "Parco", "cparco@gmail.com", "Cuentas");
 
 		trabajadorServicio.actualizarTrabajador(trabajadorUpdated);
 
@@ -91,11 +91,11 @@ class DemoApplicationTests {
 	@Test
 	void shouldDeleteTrabajador(){
 		List<Trabajador> trabajadorList = new ArrayList<>();
-		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+		trabajadorList.add(new Comercial(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com", 20));
+		trabajadorList.add(new Administrativo(3L, "Carmelo", "Parco", "cparco@gmail.com", "Marketing"));
 
-		trabajadorServicio.eliminarTrabajador(1L);
+		trabajadorServicio.eliminarTrabajador(2L);
 
-		verify(trabajadorRepository).deleteById(1L);
+		verify(trabajadorRepository).deleteById(2L);
 	}
 }
