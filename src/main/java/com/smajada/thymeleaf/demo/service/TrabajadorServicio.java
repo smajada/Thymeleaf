@@ -1,5 +1,6 @@
 package com.smajada.thymeleaf.demo.service;
 
+
 import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.repository.TrabajadorRepository;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,5 @@ public class TrabajadorServicio {
     public void eliminarTrabajador(Long id){
         trabajadorRepository.deleteById(id);
     }
+
 }

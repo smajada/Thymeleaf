@@ -1,6 +1,7 @@
 package com.smajada.thymeleaf.demo.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.*;
@@ -11,6 +12,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 //@PrimaryKeyJoinColumn(referencedColumnName = "trabajador_id")
+@DiscriminatorValue("COMERCIAL")
 public class Comercial extends Trabajador{
 
     public Comercial(Long id, String nombre, String apellido, String email, int objetivoVentasMensuales) {

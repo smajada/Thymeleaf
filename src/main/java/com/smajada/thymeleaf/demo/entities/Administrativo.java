@@ -1,6 +1,7 @@
 package com.smajada.thymeleaf.demo.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.*;
@@ -11,6 +12,7 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@DiscriminatorValue("ADMINISTRATIVO")
 public class Administrativo extends Trabajador{
 
     public Administrativo(Long id, String nombre, String apellido, String email, String departamento) {

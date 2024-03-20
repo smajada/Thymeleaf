@@ -31,25 +31,28 @@ public class TrabajadorController {
         modelo.addAttribute("comercial", new Comercial());
         modelo.addAttribute("administrativo", new Administrativo());
         modelo.addAttribute("titlePage", "Nuevo trabajador");
-        return "crear_trabajador";
+        return "crear_administrativo";
     }
 
     @PostMapping("/trabajadores")
-    public String guardarTrabajador(@ModelAttribute("administrativo") Administrativo administrativo, @ModelAttribute("comercial") Comercial comercial){
-        if (comercial.getId() == null){
-            trabajadorServicio.guardarTrabajadores(comercial);
-        } else {
-            trabajadorServicio.actualizarTrabajador(comercial);
-        }
-
-        if (administrativo.getId() == null){
-            trabajadorServicio.guardarTrabajadores(administrativo);
-        } else {
-            trabajadorServicio.actualizarTrabajador(administrativo);
+    public String guardarTrabajador(@RequestParam("tipo") String tipo, @ModelAttribute("administrativo") Administrativo administrativo, @ModelAttribute("comercial") Comercial comercial) {
+        if ("administrativo".equals(tipo)) {
+            if (administrativo.getId() == null) {
+                trabajadorServicio.guardarTrabajadores(administrativo);
+            } else {
+                trabajadorServicio.actualizarTrabajador(administrativo);
+            }
+        } else if ("comercial".equals(tipo)) {
+            if (comercial.getId() == null) {
+                trabajadorServicio.guardarTrabajadores(comercial);
+            } else {
+                trabajadorServicio.actualizarTrabajador(comercial);
+            }
         }
 
         return "redirect:/trabajadores";
     }
+
 
     @GetMapping("/trabajadores/editar/{id}")
     public String editarTrabajador(@PathVariable Long id, Model modelo){

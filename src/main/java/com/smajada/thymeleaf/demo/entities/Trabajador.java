@@ -3,7 +3,6 @@ package com.smajada.thymeleaf.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 //@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,7 +10,9 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="trabajador_type",
+        discriminatorType = DiscriminatorType.STRING)
 //@Table(name = "trabajadores")
 public abstract class Trabajador {
 
@@ -22,8 +23,8 @@ public abstract class Trabajador {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
