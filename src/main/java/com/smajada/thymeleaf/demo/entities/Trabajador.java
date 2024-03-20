@@ -9,10 +9,10 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "estudiantes")
-public class Estudiante {
+@Table(name = "trabajadores")
+public class Trabajador {
 
-    public Estudiante(String nombre, String apellido, String email) {
+    public Trabajador(String nombre, String apellido, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
