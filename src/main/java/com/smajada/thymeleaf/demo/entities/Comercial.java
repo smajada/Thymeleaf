@@ -10,13 +10,19 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 //@PrimaryKeyJoinColumn(referencedColumnName = "trabajador_id")
 public class Comercial extends Trabajador{
 
-    @Column(name = "objetivo_ventas_mensuales")
-    private double objetivoVentasMensuales;
+    public Comercial(Long id, String nombre, String apellido, String email, int objetivoVentasMensuales) {
+        super(id, nombre, apellido, email);
+        this.objetivoVentasMensuales = objetivoVentasMensuales;
+    }
 
-    @Column(name = "porcentaje_comision")
-    private double porcentajeComision;
+    public Comercial(String nombre, String apellido, String email, int objetivoVentasMensuales) {
+        super(nombre, apellido, email);
+        this.objetivoVentasMensuales = objetivoVentasMensuales;
+    }
+
+    @Column(name = "objetivo_ventas_mensuales")
+    private int objetivoVentasMensuales;
 }

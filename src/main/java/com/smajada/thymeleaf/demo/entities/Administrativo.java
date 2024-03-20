@@ -11,12 +11,18 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Administrativo extends Trabajador{
+
+    public Administrativo(Long id, String nombre, String apellido, String email, String departamento) {
+        super(id, nombre, apellido, email);
+        this.departamento = departamento;
+    }
+
+    public Administrativo(String nombre, String apellido, String email, String departamento) {
+        super(nombre, apellido, email);
+        this.departamento = departamento;
+    }
 
     @Column(name = "departamento")
     private String departamento;
-
-    @Column(name = "horario_trabajo")
-    private String horarioTrabajo;
 }
