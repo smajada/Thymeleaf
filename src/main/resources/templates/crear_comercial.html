@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
             <h1 class="text-center">Registro de estudiantes</h1>
             <div class="card-body">
-                <form th:action="@{/trabajadores}" th:object="${comercial}" method="post" id="trabajadorForm">
+                <form th:action="@{/trabajadores/comercial}" th:object="${comercial}" method="post" id="trabajadorForm">
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -31,26 +31,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="tipo" class="form-label">Tipo de trabajador</label>
-                        <select class="form-select" id="tipo" name="tipo" th:field="*{tipo}">
-                            <option value="comercial">Comercial</option>
-                            <option value="administrativo">Administrativo</option>
-                        </select>
+                        <label for="objetivoVentasMensuales" class="form-label">Objetivo de ventas mensuales</label>
+                        <input type="number" class="form-control" id="objetivoVentasMensuales" aria-describedby="objetivoVentasMensualesHelp"
+                               th:field="*{objetivoVentasMensuales}">
                     </div>
 
-<!--                    <div class="mb-3" th:if="${trabajador.tipo == 'administrativo'}">-->
-<!--                        &lt;!&ndash; Campos específicos para el tipo Comercial &ndash;&gt;-->
-<!--                        <label for="departamento" class="form-label">Departamento</label>-->
-<!--                        <input type="text" class="form-control" id="departamento"-->
-<!--                               th:field="*{departamento}">-->
-<!--                    </div>-->
-
-<!--                    <div class="mb-3" th:if="${trabajador.tipo == 'comercial'}">-->
-<!--                        &lt;!&ndash; Campos específicos para el tipo Administrativo &ndash;&gt;-->
-<!--                        <label for="objetivoVentasMensuales" class="form-label">Objetivo de ventas mensuales</label>-->
-<!--                        <input type="text" class="form-control" id="objetivoVentasMensuales"-->
-<!--                               th:field="*{objetivoVentasMensuales}">-->
-<!--                    </div>-->
 
                     <div class="box-footer">
                         <button class="btn btn-primary">Guardar</button>

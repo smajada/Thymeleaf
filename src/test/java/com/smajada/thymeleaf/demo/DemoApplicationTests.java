@@ -83,7 +83,7 @@ class DemoApplicationTests {
 
 		Administrativo trabajadorUpdated = new Administrativo(3L, "Juan", "Parco", "cparco@gmail.com", "Cuentas");
 
-		trabajadorServicio.actualizarTrabajador(trabajadorUpdated);
+		trabajadorServicio.actualizarTrabajador(trabajadorUpdated, trabajadorUpdated.getId());
 
 		verify(trabajadorRepository).save(trabajadorUpdated);
 	}

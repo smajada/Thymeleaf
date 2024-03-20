@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
             <h1 class="text-center">Registro de estudiantes</h1>
             <div class="card-body">
-                <form th:action="@{/trabajadores}" th:object="${administrativo}" method="post" id="trabajadorForm">
+                <form th:action="@{/trabajadores/administrativo}" th:object="${administrativo}" method="post" id="trabajadorForm">
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -28,6 +28,12 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                                th:field="*{email}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <input type="text" class="form-control" id="departamento" aria-describedby="departamentoHelp"
+                               th:field="*{departamento}">
                     </div>
 
                     <div class="box-footer">

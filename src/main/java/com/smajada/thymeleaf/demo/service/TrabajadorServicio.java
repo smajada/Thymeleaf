@@ -29,8 +29,15 @@ public class TrabajadorServicio {
         return trabajadorRepository.getReferenceById(id);
     }
 
-    public Trabajador actualizarTrabajador(Trabajador trabajador){
-        return trabajadorRepository.save(trabajador);
+    public void actualizarTrabajador(Trabajador trabajador, Long id){
+        trabajadorRepository.findById(id)
+                .ifPresent(trabajador1 -> {
+                    trabajador1.setNombre(trabajador.getNombre());
+                    trabajador1.setApellido(trabajador.getApellido());
+                    trabajador1.setEmail(trabajador.getEmail());
+
+                    trabajadorRepository.save(trabajador1);
+                });
     }
 
     public void eliminarTrabajador(Long id){

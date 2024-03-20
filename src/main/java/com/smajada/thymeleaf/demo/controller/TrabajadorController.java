@@ -6,6 +6,8 @@ import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -24,31 +26,40 @@ public class TrabajadorController {
         return "trabajadores";
     }
 
-    @GetMapping("/trabajadores/nuevo")
-    public String mostrarTrabajadoresFormulario(Model modelo){
-//        Trabajador trabajador = new Trabajador();
-//        modelo.addAttribute("trabajador", trabajador);
-        modelo.addAttribute("comercial", new Comercial());
+    @GetMapping("/trabajadores/nuevo_administrativo")
+    public String mostrarAdministrativosFormulario(Model modelo){
         modelo.addAttribute("administrativo", new Administrativo());
-        modelo.addAttribute("titlePage", "Nuevo trabajador");
+        modelo.addAttribute("titlePage", "Nuevo administrativo");
         return "crear_administrativo";
     }
 
-    @PostMapping("/trabajadores")
-    public String guardarTrabajador(@RequestParam("tipo") String tipo, @ModelAttribute("administrativo") Administrativo administrativo, @ModelAttribute("comercial") Comercial comercial) {
-        if ("administrativo".equals(tipo)) {
+    @GetMapping("/trabajadores/nuevo_comercial")
+    public String mostrarComercialesFormulario(Model modelo){
+        modelo.addAttribute("comercial", new Comercial());
+        modelo.addAttribute("titlePage", "Nuevo comercial");
+        return "crear_comercial";
+    }
+
+    @PostMapping("/trabajadores/administrativo")
+    public String guardarAdministrativo(@ModelAttribute("administrativo") Administrativo administrativo) {
+
             if (administrativo.getId() == null) {
                 trabajadorServicio.guardarTrabajadores(administrativo);
             } else {
-                trabajadorServicio.actualizarTrabajador(administrativo);
+                trabajadorServicio.actualizarTrabajador(administrativo, administrativo.getId());
             }
-        } else if ("comercial".equals(tipo)) {
+
+        return "redirect:/trabajadores";
+    }
+
+    @PostMapping("/trabajadores/comercial")
+    public String guardarComercial(@ModelAttribute("comercial") Comercial comercial) {
+
             if (comercial.getId() == null) {
                 trabajadorServicio.guardarTrabajadores(comercial);
             } else {
-                trabajadorServicio.actualizarTrabajador(comercial);
+                trabajadorServicio.actualizarTrabajador(comercial, comercial.getId());
             }
-        }
 
         return "redirect:/trabajadores";
     }
@@ -59,19 +70,6 @@ public class TrabajadorController {
         modelo.addAttribute("trabajador", trabajadorServicio.getTrabajadorporId(id));
         modelo.addAttribute("titlePage", "Editar usuario");
         return "editar_trabajador";
-    }
-
-    @PostMapping("/trabajadores/{id}")
-    public String actualizarTrabajador(@PathVariable Long id, @ModelAttribute("trabajador") Trabajador trabajador) {
-        Trabajador trabajador1 = trabajadorServicio.getTrabajadorporId(id);
-
-        trabajador1.setNombre(trabajador.getNombre());
-        trabajador1.setApellido(trabajador.getApellido());
-        trabajador1.setEmail(trabajador.getEmail());
-
-        trabajadorServicio.actualizarTrabajador(trabajador1);
-
-        return "redirect:/trabajadores";
     }
 
     @GetMapping("/trabajadores/{id}")
