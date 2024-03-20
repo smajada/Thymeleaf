@@ -1,7 +1,7 @@
 package com.smajada.thymeleaf.demo.service;
 
 import com.smajada.thymeleaf.demo.entities.Trabajador;
-import com.smajada.thymeleaf.demo.repository.EstudianteRepository;
+import com.smajada.thymeleaf.demo.repository.TrabajadorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,29 +10,29 @@ import java.util.List;
 @Service
 public class TrabajadorServicio {
 
-    private final EstudianteRepository estudianteRepository;
+    private final TrabajadorRepository trabajadorRepository;
 
-    public TrabajadorServicio(EstudianteRepository estudianteRepository) {
-        this.estudianteRepository = estudianteRepository;
+    public TrabajadorServicio(TrabajadorRepository trabajadorRepository) {
+        this.trabajadorRepository = trabajadorRepository;
     }
 
     public List<Trabajador> listAllTrabajadores(){
-        return estudianteRepository.findAll();
+        return trabajadorRepository.findAll();
     }
 
     public Trabajador guardarTrabajadores(Trabajador trabajador){
-        return estudianteRepository.save(trabajador);
+        return trabajadorRepository.save(trabajador);
     }
 
     public Trabajador getTrabajadorporId(Long id){
-        return estudianteRepository.getReferenceById(id);
+        return trabajadorRepository.getReferenceById(id);
     }
 
     public Trabajador actualizarTrabajador(Trabajador trabajador){
-        return estudianteRepository.save(trabajador);
+        return trabajadorRepository.save(trabajador);
     }
 
     public void eliminarTrabajador(Long id){
-        estudianteRepository.deleteById(id);
+        trabajadorRepository.deleteById(id);
     }
 }

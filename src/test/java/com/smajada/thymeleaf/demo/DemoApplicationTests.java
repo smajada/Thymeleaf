@@ -1,7 +1,9 @@
 package com.smajada.thymeleaf.demo;
 
+import com.smajada.thymeleaf.demo.entities.Administrativo;
+import com.smajada.thymeleaf.demo.entities.Comercial;
 import com.smajada.thymeleaf.demo.entities.Trabajador;
-import com.smajada.thymeleaf.demo.repository.EstudianteRepository;
+import com.smajada.thymeleaf.demo.repository.TrabajadorRepository;
 import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +23,7 @@ import static org.mockito.Mockito.when;
 class DemoApplicationTests {
 
 	@Mock
-	EstudianteRepository estudianteRepository;
+	TrabajadorRepository trabajadorRepository;
 
 	@InjectMocks
 	TrabajadorServicio trabajadorServicio;
@@ -35,7 +37,7 @@ class DemoApplicationTests {
 		trabajadorList.add(new Trabajador(2L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
 		trabajadorList.add(new Trabajador(3L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		when(estudianteRepository.findAll()).thenReturn(trabajadorList);
+		when(trabajadorRepository.findAll()).thenReturn(trabajadorList);
 
 		List<Trabajador> response = trabajadorServicio.listAllTrabajadores();
 
@@ -49,7 +51,7 @@ class DemoApplicationTests {
 		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
 		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		when(estudianteRepository.getReferenceById(2L)).thenReturn(trabajadorList.get(1));
+		when(trabajadorRepository.getReferenceById(2L)).thenReturn(trabajadorList.get(1));
 
 		Trabajador response = trabajadorServicio.getTrabajadorporId(2L);
 
@@ -65,7 +67,7 @@ class DemoApplicationTests {
 	void shouldSaveEstudiante(){
 		 Trabajador trabajador3 = new Trabajador(3L, "Juan", "Aguilera", "jaguilera@gmail.com");
 
-		when(estudianteRepository.save(trabajador3)).thenReturn(trabajador3);
+		when(trabajadorRepository.save(trabajador3)).thenReturn(trabajador3);
 
 		Trabajador response = trabajadorServicio.guardarTrabajadores(trabajador3);
 
@@ -76,14 +78,14 @@ class DemoApplicationTests {
 	@Test
 	void shouldUpdateTrabajador(){
 		List<Trabajador> trabajadorList = new ArrayList<>();
-		trabajadorList.add(new Trabajador(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
-		trabajadorList.add(new Trabajador(2L, "Carmelo", "Parco", "cparco@gmail.com"));
+		trabajadorList.add(new Comercial(1L, "Begoña", "Carrillo", "bcarrillo@gmail.com"));
+		trabajadorList.add(new Administrativo(2L, "Carmelo", "Parco", "cparco@gmail.com"));
 
-		Trabajador trabajadorUpdated = new Trabajador(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
+		Comercial trabajadorUpdated = new Comercial(1L, "Juan", "Aguilera", "jaguilera@gmail.com");
 
 		trabajadorServicio.actualizarTrabajador(trabajadorUpdated);
 
-		verify(estudianteRepository).save(trabajadorUpdated);
+		verify(trabajadorRepository).save(trabajadorUpdated);
 	}
 
 	@Test
@@ -94,6 +96,6 @@ class DemoApplicationTests {
 
 		trabajadorServicio.eliminarTrabajador(1L);
 
-		verify(estudianteRepository).deleteById(1L);
+		verify(trabajadorRepository).deleteById(1L);
 	}
 }

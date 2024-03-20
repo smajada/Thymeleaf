@@ -3,16 +3,19 @@ package com.smajada.thymeleaf.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+
+//@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Table(name = "trabajadores")
-public class Trabajador {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+//@Table(name = "trabajadores")
+public abstract class Trabajador {
 
-    public Trabajador(String nombre, String apellido, String email) {
+     public Trabajador(String nombre, String apellido, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -20,7 +23,7 @@ public class Trabajador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;

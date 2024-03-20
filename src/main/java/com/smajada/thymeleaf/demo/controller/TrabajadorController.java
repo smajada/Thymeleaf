@@ -1,5 +1,7 @@
 package com.smajada.thymeleaf.demo.controller;
 
+import com.smajada.thymeleaf.demo.entities.Administrativo;
+import com.smajada.thymeleaf.demo.entities.Comercial;
 import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
 import org.springframework.stereotype.Controller;
@@ -7,44 +9,57 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class TrabajadorControlador {
+public class TrabajadorController {
 
     private final TrabajadorServicio trabajadorServicio;
 
-    public TrabajadorControlador(TrabajadorServicio trabajadorServicio) {
+    public TrabajadorController(TrabajadorServicio trabajadorServicio) {
         this.trabajadorServicio = trabajadorServicio;
     }
 
     @GetMapping({"/trabajadores", "/"})
-    public String listarEstudiantes(Model modelo){
+    public String listarTrabajadores(Model modelo){
         modelo.addAttribute("trabajadores", trabajadorServicio.listAllTrabajadores());
         modelo.addAttribute("titlePage", "Listado");
         return "trabajadores";
     }
 
     @GetMapping("/trabajadores/nuevo")
-    public String mostrarEstudianteFormulario(Model modelo){
-        Trabajador trabajador = new Trabajador();
-        modelo.addAttribute("trabajador", trabajador);
+    public String mostrarTrabajadoresFormulario(Model modelo){
+//        Trabajador trabajador = new Trabajador();
+//        modelo.addAttribute("trabajador", trabajador);
+        modelo.addAttribute("comercial", new Comercial());
+        modelo.addAttribute("administrativo", new Administrativo());
         modelo.addAttribute("titlePage", "Nuevo trabajador");
         return "crear_trabajador";
     }
 
     @PostMapping("/trabajadores")
-    public String guardarEstudiante(@ModelAttribute("trabajador") Trabajador trabajador){
-        trabajadorServicio.guardarTrabajadores(trabajador);
+    public String guardarTrabajador(@ModelAttribute("administrativo") Administrativo administrativo, @ModelAttribute("comercial") Comercial comercial){
+        if (comercial.getId() == null){
+            trabajadorServicio.guardarTrabajadores(comercial);
+        } else {
+            trabajadorServicio.actualizarTrabajador(comercial);
+        }
+
+        if (administrativo.getId() == null){
+            trabajadorServicio.guardarTrabajadores(administrativo);
+        } else {
+            trabajadorServicio.actualizarTrabajador(administrativo);
+        }
+
         return "redirect:/trabajadores";
     }
 
     @GetMapping("/trabajadores/editar/{id}")
-    public String editarEstudiante(@PathVariable Long id, Model modelo){
+    public String editarTrabajador(@PathVariable Long id, Model modelo){
         modelo.addAttribute("trabajador", trabajadorServicio.getTrabajadorporId(id));
         modelo.addAttribute("titlePage", "Editar usuario");
         return "editar_trabajador";
     }
 
     @PostMapping("/trabajadores/{id}")
-    public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("trabajador") Trabajador trabajador) {
+    public String actualizarTrabajador(@PathVariable Long id, @ModelAttribute("trabajador") Trabajador trabajador) {
         Trabajador trabajador1 = trabajadorServicio.getTrabajadorporId(id);
 
         trabajador1.setNombre(trabajador.getNombre());
@@ -57,7 +72,7 @@ public class TrabajadorControlador {
     }
 
     @GetMapping("/trabajadores/{id}")
-    public String eliminarEstudiante(@PathVariable Long id){
+    public String eliminarTrabajador(@PathVariable Long id){
         trabajadorServicio.eliminarTrabajador(id);
 
         return "redirect:/trabajadores";

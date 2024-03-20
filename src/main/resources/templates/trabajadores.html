@@ -16,6 +16,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
@@ -24,6 +25,10 @@
                 <td th:text="${trabajador.nombre}" >Nombre</td>
                 <td th:text="${trabajador.apellido}">Apellido</td>
                 <td th:text="${trabajador.email}">Email</td>
+                <td>
+                    <span th:if="${trabajador.__class__.simpleName == 'Comercial'}">Comercial</span>
+                    <span th:if="${trabajador.__class__.simpleName == 'Administrativo'}">Administrativo</span>
+                </td>
                 <td>
                     <a th:href="@{/trabajadores/editar/{id}(id=${trabajador.id})}" class="btn btn-info">Editar</a>
                     <a th:href="@{/trabajadores/{id}(id=${trabajador.id})}" class="btn btn-danger">Eliminar</a>
