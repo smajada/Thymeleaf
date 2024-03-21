@@ -14,7 +14,7 @@
             <h1 class="text-center">Editar comercial</h1>
             <div class="card-body">
                 <!--/*@thymesVar id="id" type="trabajador.id"*/-->
-                <form th:action="@{/comerciales/{id}(id=${comercial.id})}" th:object="${comercial}" method="post">
+                <form th:action="@{/comerciales}" th:object="${comercial}" method="post">
 
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>

@@ -47,18 +47,6 @@ public class EmpresaController {
         return "crear_comercial";
     }
 
-    @PostMapping("/comerciales")
-    public String addComercial(@RequestBody Comercial comercial) {
-         comercialAdministrativoService.addComercial(comercial);
-        return "redirect:/";
-    }
-
-    @PostMapping("/administrativos")
-    public String addAdministrativo(@RequestBody Administrativo administrativo) {
-         comercialAdministrativoService.addAdministrativo(administrativo);
-        return "redirect:/";
-    }
-
     @GetMapping("/comerciales/editar/{id}")
     public String editarComercial(@PathVariable Long id, Model modelo){
         modelo.addAttribute("comercial", comercialAdministrativoService.getComercialById(id));
@@ -74,15 +62,27 @@ public class EmpresaController {
         return "editar_administrativo";
     }
 
-    @PostMapping("/comerciales")
-    public String editarComercial(@RequestBody Comercial comercial,  @PathVariable Long id) {
-        comercialAdministrativoService.editarComercial(id, comercial);
+    @PostMapping("/administrativos")
+    public String addAdministrativo(@ModelAttribute("administrativo") Administrativo administrativo) {
+
+        if (administrativo.getId() == null) {
+            comercialAdministrativoService.addAdministrativo(administrativo);
+        } else {
+            comercialAdministrativoService.editarAdministrativo(administrativo.getId(), administrativo);
+        }
+
         return "redirect:/";
     }
 
-    @PostMapping("/administrativos")
-    public String editarAdministrativo(@RequestBody Administrativo administrativo, @PathVariable Long id) {
-        comercialAdministrativoService.editarAdministrativo(id, administrativo);
+    @PostMapping("/comerciales")
+    public String addComercial(@ModelAttribute("comercial") Comercial comercial) {
+
+        if (comercial.getId() == null) {
+            comercialAdministrativoService.addComercial(comercial);
+        } else {
+            comercialAdministrativoService.editarComercial(comercial.getId(), comercial);
+        }
+
         return "redirect:/";
     }
 
