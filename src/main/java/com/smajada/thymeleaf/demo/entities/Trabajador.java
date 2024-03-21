@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Table(name = "trabajadores")
-public class Trabajador {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Trabajador {
 
     public Trabajador(String nombre, String apellido, String email) {
         this.nombre = nombre;
@@ -19,7 +18,7 @@ public class Trabajador {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "nombre", nullable = false, length = 50)

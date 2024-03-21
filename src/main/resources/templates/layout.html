@@ -10,21 +10,22 @@
 
 </head>
 <body>
-    <!-- Navbar -->
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Trabajadores</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" th:href="@{/trabajadores}">Listado</a>
-                    <a class="nav-link active" aria-current="page" th:href="@{/trabajadores/nuevo}">Nuevo</a>
-                </div>
+<!-- Navbar -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Trabajadores</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" th:href="@{/}">Listado</a>
+                <a class="nav-link active" aria-current="page" th:href="@{/administrativos}">Nuevo administrativo</a>
+                <a class="nav-link active" aria-current="page" th:href="@{/comerciales}">Nuevo comercial</a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <footer th:fragment="footer" class="text-center mb-5 fixed-bottom">
     &copy;2024 Todos los derechos reservados
