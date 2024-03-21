@@ -8,7 +8,6 @@ import lombok.*;
 @Entity
 @Setter
 @Getter
-@ToString
 @NoArgsConstructor
 @Table(name = "administrativos")
 public class Administrativo extends Trabajador{
@@ -20,5 +19,4 @@ public class Administrativo extends Trabajador{
 
     @Column
     private int numVentasTotales;
-
 }

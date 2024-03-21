@@ -86,6 +86,18 @@ public class EmpresaController {
         return "redirect:/";
     }
 
+    @GetMapping("/administrativos/{id}")
+    public String deleteAdministrativo(@PathVariable Long id){
+        comercialAdministrativoService.eliminarAdministrativo(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/comerciales/{id}")
+    public String deleteComercial(@PathVariable Long id){
+        comercialAdministrativoService.eliminarComercial(id);
+        return "redirect:/";
+    }
+
 
 
 

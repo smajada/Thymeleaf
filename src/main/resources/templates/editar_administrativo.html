@@ -13,32 +13,38 @@
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
             <h1 class="text-center">Editar Administrativo</h1>
             <div class="card-body">
-                <!--/*@thymesVar id="id" type="trabajador.id"*/-->
                 <form th:action="@{/administrativos}" th:object="${administrativo}" method="post">
 
-                  <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp"  th:field="*{nombre}">
-                  </div>
+                    <!-- Add hidden form field to handle update -->
+                    <input type="hidden" th:field="*{id}"/>
 
-                  <div class="mb-3">
-                    <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp"  th:field="*{apellido}">
-                  </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp"
+                               th:field="*{nombre}">
+                    </div>
 
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"  th:field="*{email}">
-                  </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp"
+                               th:field="*{apellido}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                               th:field="*{email}">
+                    </div>
 
                     <div class="mb-3">
                         <label for="ventasTotales" class="form-label">Ventas Totales</label>
-                        <input type="number" class="form-control" id="ventasTotales" aria-describedby="ventasTotalesHelp"  th:field="*{numVentasTotales}">
+                        <input type="number" class="form-control" id="ventasTotales"
+                               aria-describedby="ventasTotalesHelp" th:field="*{numVentasTotales}">
                     </div>
 
-                  <div class="box-footer">
-                    <button class="btn btn-primary">Guardar</button>
-                  </div>
+                    <div class="box-footer">
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>

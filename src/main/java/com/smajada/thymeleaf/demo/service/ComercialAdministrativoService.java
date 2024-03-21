@@ -45,6 +45,8 @@ public class ComercialAdministrativoService {
                     comercial1.setApellido(comercial.getApellido());
                     comercial1.setEmail(comercial.getEmail());
                     comercial1.setDepartamento(comercial.getDepartamento());
+
+                    comercialRepository.save(comercial1);
                 });
     }
 
@@ -55,7 +57,20 @@ public class ComercialAdministrativoService {
                     administrativo1.setApellido(administrativo.getApellido());
                     administrativo1.setEmail(administrativo.getEmail());
                     administrativo1.setNumVentasTotales(administrativo.getNumVentasTotales());
+
+                    administrativoRepository.save(administrativo1);
                 });
+
     }
+
+    public void eliminarAdministrativo(Long id){
+        administrativoRepository.deleteById(id);
+    }
+
+
+    public void eliminarComercial(Long id){
+        comercialRepository.deleteById(id);
+    }
+
 
 }

@@ -13,8 +13,10 @@
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
             <h1 class="text-center">Editar comercial</h1>
             <div class="card-body">
-                <!--/*@thymesVar id="id" type="trabajador.id"*/-->
                 <form th:action="@{/comerciales}" th:object="${comercial}" method="post">
+
+                    <!-- Add hidden form field to handle update -->
+                    <input type="hidden" th:field="*{id}" />
 
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
