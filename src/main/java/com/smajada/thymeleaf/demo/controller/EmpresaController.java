@@ -5,12 +5,13 @@ import com.smajada.thymeleaf.demo.entities.Comercial;
 import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.service.ComercialAdministrativoService;
 import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("empresa")
+@Controller
 public class EmpresaController {
 
     ComercialAdministrativoService comercialAdministrativoService;
@@ -21,18 +22,42 @@ public class EmpresaController {
         this.trabajadorServicio = trabajadorServicio;
     }
 
-    @PostMapping("addComercial")
-    public Comercial addComercial(@RequestBody Comercial comercial){
-        return comercialAdministrativoService.addComercial(comercial);
+    @GetMapping("/")
+    public String mostrarTodosLosTrabajadores(Model model) {
+        List<Comercial> comerciales = comercialAdministrativoService.listAllComerciales();
+        List<Administrativo> administrativos = comercialAdministrativoService.listAllAdministrativos();
+        model.addAttribute("comerciales", comerciales);
+        model.addAttribute("administrativos", administrativos);
+        return "trabajadores"; // Nombre de la plantilla Thymeleaf
     }
 
-    @PostMapping("addAdministrativo")
-    public Administrativo addAdministrativo(@RequestBody Administrativo administrativo){
-        return comercialAdministrativoService.addAdministrativo(administrativo);
+    @PostMapping("/comerciales")
+    public String addComercial(@RequestBody Comercial comercial) {
+         comercialAdministrativoService.addComercial(comercial);
+        return "redirect:/";
     }
 
-    @GetMapping("listTrabajadores")
-    public List<Trabajador> listTrabajadores(){
-        return trabajadorServicio.listAllTrabajadores();
+    @PostMapping("/administrativos")
+    public String addAdministrativo(@RequestBody Administrativo administrativo) {
+         comercialAdministrativoService.addAdministrativo(administrativo);
+        return "redirect:/";
     }
+
+    @GetMapping("/comerciales/editar/{id}")
+    public String editarComercial(@PathVariable Long id, Model modelo){
+        modelo.addAttribute("comercial", comercialAdministrativoService.getComercialById(id));
+        modelo.addAttribute("titlePage", "Editar usuario");
+        return "editar_comercial";
+    }
+
+    @GetMapping("/administrativos/editar/{id}")
+    public String editarAdministrativo(@PathVariable Long id, Model modelo){
+        modelo.addAttribute("administrativo", comercialAdministrativoService.getAdministrativoById(id));
+        modelo.addAttribute("titlePage", "Editar usuario");
+        return "editar_administrativo";
+    }
+
+
+
+
 }

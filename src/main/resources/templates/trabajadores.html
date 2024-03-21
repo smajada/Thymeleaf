@@ -16,18 +16,27 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr scope="row" th:each="trabajador : ${trabajadores}">
-                <td th:text="${trabajador.nombre}" >Nombre</td>
-                <td th:text="${trabajador.apellido}">Apellido</td>
-                <td th:text="${trabajador.email}">Email</td>
-                <td>
-                    <a th:href="@{/trabajadores/editar/{id}(id=${trabajador.id})}" class="btn btn-info">Editar</a>
-                    <a th:href="@{/trabajadores/{id}(id=${trabajador.id})}" class="btn btn-danger">Eliminar</a>
-                </td>
+            <!-- Itera sobre la lista de comerciales -->
+            <tr th:each="comercial : ${comerciales}">
+                <td th:text="${comercial.nombre}"></td>
+                <td th:text="${comercial.apellido}"></td>
+                <td th:text="${comercial.email}"></td>
+                <td th:text="Comercial"></td>
+                <!-- Agrega más celdas de tabla según tus atributos específicos de Comercial -->
+            </tr>
+            <!-- Itera sobre la lista de administrativos -->
+            <tr th:each="administrativo : ${administrativos}">
+                <td th:text="${administrativo.nombre}"></td>
+                <td th:text="${administrativo.apellido}"></td>
+                <td th:text="${administrativo.email}"></td>
+                <td th:text="Administrativo"></td>
+                <td></td>
+                <!-- Agrega más celdas de tabla según tus atributos específicos de Administrativo -->
             </tr>
             </tbody>
         </table>

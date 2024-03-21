@@ -6,6 +6,8 @@ import com.smajada.thymeleaf.demo.repository.AdministrativoRepository;
 import com.smajada.thymeleaf.demo.repository.ComercialRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ComercialAdministrativoService {
     ComercialRepository comercialRepository;
@@ -16,6 +18,9 @@ public class ComercialAdministrativoService {
         this.administrativoRepository = administrativoRepository;
     }
 
+    public List<Comercial> listAllComerciales() {return  comercialRepository.findAll();}
+    public List<Administrativo> listAllAdministrativos() {return administrativoRepository.findAll();}
+
     public Comercial addComercial(Comercial comercial){
         return comercialRepository.save(comercial);
     }
@@ -23,6 +28,16 @@ public class ComercialAdministrativoService {
     public Administrativo addAdministrativo(Administrativo administrativo){
         return administrativoRepository.save(administrativo);
     }
+
+    public Comercial getComercialById(Long id){
+        return comercialRepository.getReferenceById(id);
+    }
+
+    public Administrativo getAdministrativoById(Long id){
+        return administrativoRepository.getReferenceById(id);
+    }
+
+
 
 
 }

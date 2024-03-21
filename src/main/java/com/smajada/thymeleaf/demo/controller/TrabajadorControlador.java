@@ -15,12 +15,12 @@ public class TrabajadorControlador {
         this.trabajadorServicio = trabajadorServicio;
     }
 
-    @GetMapping({"/trabajadores", "/"})
-    public String listarTrabajadores(Model modelo){
-        modelo.addAttribute("trabajadores", trabajadorServicio.listAllTrabajadores());
-        modelo.addAttribute("titlePage", "Listado");
-        return "trabajadores";
-    }
+//    @GetMapping({"/trabajadores", "/"})
+//    public String listarTrabajadores(Model modelo){
+//        modelo.addAttribute("trabajadores", trabajadorServicio.listAllTrabajadores());
+//        modelo.addAttribute("titlePage", "Listado");
+//        return "trabajadores";
+//    }
 
 //    @GetMapping("/trabajadores/nuevo")
 //    public String mostrarEstudianteFormulario(Model modelo){
