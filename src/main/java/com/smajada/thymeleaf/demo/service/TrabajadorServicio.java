@@ -1,6 +1,8 @@
 package com.smajada.thymeleaf.demo.service;
 
 
+import com.smajada.thymeleaf.demo.entities.Administrativo;
+import com.smajada.thymeleaf.demo.entities.Comercial;
 import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.repository.TrabajadorRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class TrabajadorServicio {
     }
 
     public Trabajador getTrabajadorporId(Long id){
-        return trabajadorRepository.getReferenceById(id);
+        return trabajadorRepository.findById(id).orElse(null);
     }
 
     public void actualizarTrabajador(Trabajador trabajador, Long id){
@@ -35,6 +37,11 @@ public class TrabajadorServicio {
                     trabajador1.setNombre(trabajador.getNombre());
                     trabajador1.setApellido(trabajador.getApellido());
                     trabajador1.setEmail(trabajador.getEmail());
+                    if (trabajador1 instanceof Administrativo){
+                        ((Administrativo) trabajador1).setDepartamento(((Administrativo) trabajador).getDepartamento());
+                    } else {
+                        ((Comercial) trabajador1).setObjetivoVentasMensuales(((Comercial) trabajador).getObjetivoVentasMensuales());
+                    }
 
                     trabajadorRepository.save(trabajador1);
                 });

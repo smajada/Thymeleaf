@@ -11,7 +11,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
             <h1 class="text-center">Editar trabajador</h1>
             <div class="card-body">
-                <form th:action="tipo == 'Comercial' ? @{/trabajadores/comercial} : @{/trabajadores/administrativo}" th:object="${trabajador}" method="post">
+                <form th:action="${trabajador.class.simpleName == 'Comercial' ? '/trabajadores/comercial' : '/trabajadores/administrativo'}" th:object="${trabajador}" method="post">
 
                     <!-- Add hidden form field to handle update -->
                     <input type="hidden" th:field="*{id}" />
@@ -29,6 +29,16 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"  th:field="*{email}">
+                    </div>
+
+                    <div class="mb-3" th:if="${trabajador.getClass().getSimpleName() == 'Comercial'}">
+                        <label for="numVentas" class="form-label">Número de ventas</label>
+                        <input type="number" class="form-control" id="numVentas" aria-describedby="numVentasHelp"  th:field="*{objetivoVentasMensuales}">
+                    </div>
+
+                    <div class="mb-3" th:if="${trabajador.getClass().getSimpleName() == 'Administrativo'}">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <input type="text" class="form-control" id="departamento" aria-describedby="departamentoHelp"  th:field="*{departamento}">
                     </div>
 
                     <div class="box-footer">

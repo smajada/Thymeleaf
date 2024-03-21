@@ -3,6 +3,8 @@ package com.smajada.thymeleaf.demo.controller;
 import com.smajada.thymeleaf.demo.entities.Administrativo;
 import com.smajada.thymeleaf.demo.entities.Comercial;
 import com.smajada.thymeleaf.demo.entities.Trabajador;
+import com.smajada.thymeleaf.demo.repository.AdministrativoRepository;
+import com.smajada.thymeleaf.demo.repository.ComercialRepository;
 import com.smajada.thymeleaf.demo.service.TrabajadorServicio;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class TrabajadorController {
 
     private final TrabajadorServicio trabajadorServicio;
+    private final ComercialRepository comercialRepository;
+    private final AdministrativoRepository administrativoRepository;
 
-    public TrabajadorController(TrabajadorServicio trabajadorServicio) {
+    public TrabajadorController(TrabajadorServicio trabajadorServicio, ComercialRepository comercialRepository, AdministrativoRepository administrativoRepository) {
         this.trabajadorServicio = trabajadorServicio;
+        this.comercialRepository = comercialRepository;
+        this.administrativoRepository = administrativoRepository;
     }
 
     @GetMapping({"/trabajadores", "/"})
@@ -67,7 +73,13 @@ public class TrabajadorController {
 
     @GetMapping("/trabajadores/editar/{id}")
     public String editarTrabajador(@PathVariable Long id, Model modelo){
-        modelo.addAttribute("trabajador", trabajadorServicio.getTrabajadorporId(id));
+        if (trabajadorServicio.getTrabajadorporId(id).getClass().equals(Administrativo.class)){
+            Administrativo administrativo = administrativoRepository.findById(id).orElse(null);
+            modelo.addAttribute("trabajador", administrativo);
+        } else {
+            Comercial comercial = comercialRepository.findById(id).orElse(null);
+            modelo.addAttribute("trabajador", comercial);
+        }
         modelo.addAttribute("titlePage", "Editar usuario");
         return "editar_trabajador";
     }
