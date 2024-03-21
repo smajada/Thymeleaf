@@ -2,6 +2,7 @@ package com.smajada.thymeleaf.demo.service;
 
 import com.smajada.thymeleaf.demo.entities.Administrativo;
 import com.smajada.thymeleaf.demo.entities.Comercial;
+import com.smajada.thymeleaf.demo.entities.Trabajador;
 import com.smajada.thymeleaf.demo.repository.AdministrativoRepository;
 import com.smajada.thymeleaf.demo.repository.ComercialRepository;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,23 @@ public class ComercialAdministrativoService {
     }
 
     public void editarComercial(Long id, Comercial comercial){
-
+        comercialRepository.findById(id)
+                .ifPresent(comercial1 -> {
+                    comercial1.setNombre(comercial.getNombre());
+                    comercial1.setApellido(comercial.getApellido());
+                    comercial1.setEmail(comercial.getEmail());
+                    comercial1.setDepartamento(comercial.getDepartamento());
+                });
     }
 
-
-
+    public void editarAdministrativo(Long id, Administrativo administrativo){
+        administrativoRepository.findById(id)
+                .ifPresent(administrativo1 -> {
+                    administrativo1.setNombre(administrativo.getNombre());
+                    administrativo1.setApellido(administrativo.getApellido());
+                    administrativo1.setEmail(administrativo.getEmail());
+                    administrativo1.setNumVentasTotales(administrativo.getNumVentasTotales());
+                });
+    }
 
 }

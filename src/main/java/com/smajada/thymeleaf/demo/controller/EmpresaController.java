@@ -75,16 +75,18 @@ public class EmpresaController {
     }
 
     @PostMapping("/comerciales")
-    public String editarComercial(@RequestBody Comercial comercial) {
-        comercialAdministrativoService.editarComercial(comercial);
+    public String editarComercial(@RequestBody Comercial comercial,  @PathVariable Long id) {
+        comercialAdministrativoService.editarComercial(id, comercial);
         return "redirect:/";
     }
 
     @PostMapping("/administrativos")
-    public String editarAdministrativo(@RequestBody Administrativo administrativo) {
-        comercialAdministrativoService.editarAdministrativo(administrativo);
+    public String editarAdministrativo(@RequestBody Administrativo administrativo, @PathVariable Long id) {
+        comercialAdministrativoService.editarAdministrativo(id, administrativo);
         return "redirect:/";
     }
+
+
 
 
 }
