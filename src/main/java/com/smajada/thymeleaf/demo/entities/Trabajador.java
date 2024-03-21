@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "trabajadores")
 public class Trabajador {
 

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
 <head th:replace="~{layout :: head}"></head>
-
 <body>
+
 <nav th:replace="~{layout :: navbar}"></nav>
 
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
-            <h1 class="text-center">Editar trabajador</h1>
+            <h1 class="text-center">Registro de administrativos</h1>
             <div class="card-body">
-                <form th:action="${trabajador.class.simpleName == 'Comercial' ? '/comerciales' : '/administrativos'}" th:object="${trabajador}" method="post">
-
-                    <!-- Add hidden form field to handle update -->
-                    <input type="hidden" th:field="*{id}" />
+                <!--/*@thymesVar id="trabajador" type="Trabajador"*/-->
+                <form th:action="@{/administrativos}" th:object="${administrativo}" method="post">
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -31,14 +30,9 @@
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"  th:field="*{email}">
                     </div>
 
-                    <div class="mb-3" th:if="${trabajador.class.simpleName == 'Administrativo'}">
-                        <label for="numVentas" class="form-label">Número de ventas</label>
-                        <input type="number" class="form-control" id="numVentas" aria-describedby="numVentasHelp"  th:field="*{numVentasTotales}">
-                    </div>
-
-                    <div class="mb-3" th:if="${trabajador.class.simpleName == 'Comercial'}">
-                        <label for="departamento" class="form-label">Número de ventas</label>
-                        <input type="text" class="form-control" id="departamento" aria-describedby="departamentoHelp"  th:field="*{departamento}">
+                    <div class="mb-3">
+                        <label for="ventasTotales" class="form-label">Ventas Totales</label>
+                        <input type="number" class="form-control" id="ventasTotales" aria-describedby="ventasTotalesHelp"  th:field="*{numVentasTotales}">
                     </div>
 
                     <div class="box-footer">
