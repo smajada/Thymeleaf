@@ -16,19 +16,19 @@ public class TrabajadorControlador {
     }
 
     @GetMapping({"/trabajadores", "/"})
-    public String listarEstudiantes(Model modelo){
+    public String listarTrabajadores(Model modelo){
         modelo.addAttribute("trabajadores", trabajadorServicio.listAllTrabajadores());
         modelo.addAttribute("titlePage", "Listado");
         return "trabajadores";
     }
 
-    @GetMapping("/trabajadores/nuevo")
-    public String mostrarEstudianteFormulario(Model modelo){
-        Trabajador trabajador = new Trabajador();
-        modelo.addAttribute("trabajador", trabajador);
-        modelo.addAttribute("titlePage", "Nuevo trabajador");
-        return "crear_trabajador";
-    }
+//    @GetMapping("/trabajadores/nuevo")
+//    public String mostrarEstudianteFormulario(Model modelo){
+//        Trabajador trabajador = new Trabajador();
+//        modelo.addAttribute("trabajador", trabajador);
+//        modelo.addAttribute("titlePage", "Nuevo trabajador");
+//        return "crear_trabajador";
+//    }
 
     @PostMapping("/trabajadores")
     public String guardarEstudiante(@ModelAttribute("trabajador") Trabajador trabajador){
@@ -45,13 +45,7 @@ public class TrabajadorControlador {
 
     @PostMapping("/trabajadores/{id}")
     public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("trabajador") Trabajador trabajador) {
-        Trabajador trabajador1 = trabajadorServicio.getTrabajadorporId(id);
-
-        trabajador1.setNombre(trabajador.getNombre());
-        trabajador1.setApellido(trabajador.getApellido());
-        trabajador1.setEmail(trabajador.getEmail());
-
-        trabajadorServicio.actualizarTrabajador(trabajador1);
+        trabajadorServicio.actualizarTrabajador(trabajador, id);
 
         return "redirect:/trabajadores";
     }

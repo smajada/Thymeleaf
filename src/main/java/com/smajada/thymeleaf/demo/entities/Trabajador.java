@@ -3,14 +3,12 @@ package com.smajada.thymeleaf.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+//@Entity
 @Setter
+@Getter
 @ToString
-@Table(name = "trabajadores")
-public class Trabajador {
+@MappedSuperclass
+public abstract class Trabajador {
 
     public Trabajador(String nombre, String apellido, String email) {
         this.nombre = nombre;
@@ -31,4 +29,8 @@ public class Trabajador {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
+
+    public Trabajador() {
+
+    }
 }
