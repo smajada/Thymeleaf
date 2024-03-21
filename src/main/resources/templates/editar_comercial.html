@@ -2,18 +2,19 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         lang="en">
-<head th:replace="~{layout :: head}"></head>
-<body>
 
+<head th:replace="~{layout :: head}"></head>
+
+<body>
 <nav th:replace="~{layout :: navbar}"></nav>
 
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 container justify-content-center card">
-            <h1 class="text-center">Registro de estudiantes</h1>
+            <h1 class="text-center">Editar comercial</h1>
             <div class="card-body">
-                <!--/*@thymesVar id="trabajador" type="Trabajador"*/-->
-                <form th:action="@{/trabajadores}" th:object="${trabajador}" method="post">
+                <!--/*@thymesVar id="id" type="trabajador.id"*/-->
+                <form th:action="@{/comerciales/{id}(id=${comercial.id})}" th:object="${comercial}" method="post">
 
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
@@ -29,6 +30,11 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp"  th:field="*{email}">
                   </div>
+
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <input type="text" class="form-control" id="departamento" aria-describedby="departamentoHelp"  th:field="*{departamento}">
+                    </div>
 
                   <div class="box-footer">
                     <button class="btn btn-primary">Guardar</button>

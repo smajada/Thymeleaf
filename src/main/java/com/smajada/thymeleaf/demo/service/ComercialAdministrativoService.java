@@ -37,6 +37,10 @@ public class ComercialAdministrativoService {
         return administrativoRepository.getReferenceById(id);
     }
 
+    public void editarComercial(Long id, Comercial comercial){
+
+    }
+
 
 
 

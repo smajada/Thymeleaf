@@ -31,6 +31,22 @@ public class EmpresaController {
         return "trabajadores"; // Nombre de la plantilla Thymeleaf
     }
 
+    @GetMapping("/administrativos")
+    public String crearAdministrativo(Model modelo){
+        Administrativo administrativo = new Administrativo();
+        modelo.addAttribute("administrativo", administrativo);
+        modelo.addAttribute("titlePage", "Nuevo administrativo");
+        return "crear_administrativo";
+    }
+
+    @GetMapping("/comerciales")
+    public String crearComercial(Model modelo){
+        Comercial comercial = new Comercial();
+        modelo.addAttribute("comercial", comercial);
+        modelo.addAttribute("titlePage", "Nuevo comercial");
+        return "crear_comercial";
+    }
+
     @PostMapping("/comerciales")
     public String addComercial(@RequestBody Comercial comercial) {
          comercialAdministrativoService.addComercial(comercial);
@@ -50,6 +66,7 @@ public class EmpresaController {
         return "editar_comercial";
     }
 
+
     @GetMapping("/administrativos/editar/{id}")
     public String editarAdministrativo(@PathVariable Long id, Model modelo){
         modelo.addAttribute("administrativo", comercialAdministrativoService.getAdministrativoById(id));
@@ -57,7 +74,17 @@ public class EmpresaController {
         return "editar_administrativo";
     }
 
+    @PostMapping("/comerciales")
+    public String editarComercial(@RequestBody Comercial comercial) {
+        comercialAdministrativoService.editarComercial(comercial);
+        return "redirect:/";
+    }
 
+    @PostMapping("/administrativos")
+    public String editarAdministrativo(@RequestBody Administrativo administrativo) {
+        comercialAdministrativoService.editarAdministrativo(administrativo);
+        return "redirect:/";
+    }
 
 
 }

@@ -27,7 +27,10 @@
                 <td th:text="${comercial.apellido}"></td>
                 <td th:text="${comercial.email}"></td>
                 <td th:text="Comercial"></td>
-                <!-- Agrega más celdas de tabla según tus atributos específicos de Comercial -->
+                <td>
+                    <a th:href="@{/comerciales/editar/{id}(id=${comercial.id})}" class="btn btn-info">Editar</a>
+                    <a th:href="@{/comerciales/{id}(id=${comercial.id})}" class="btn btn-danger">Eliminar</a>
+                </td>
             </tr>
             <!-- Itera sobre la lista de administrativos -->
             <tr th:each="administrativo : ${administrativos}">
@@ -35,8 +38,10 @@
                 <td th:text="${administrativo.apellido}"></td>
                 <td th:text="${administrativo.email}"></td>
                 <td th:text="Administrativo"></td>
-                <td></td>
-                <!-- Agrega más celdas de tabla según tus atributos específicos de Administrativo -->
+                <td>
+                    <a th:href="@{/administrativos/editar/{id}(id=${administrativo.id})}" class="btn btn-info">Editar</a>
+                    <a th:href="@{/administrativos/{id}(id=${administrativo.id})}" class="btn btn-danger">Eliminar</a>
+                </td>
             </tr>
             </tbody>
         </table>
