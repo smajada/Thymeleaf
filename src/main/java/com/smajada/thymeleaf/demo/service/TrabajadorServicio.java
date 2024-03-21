@@ -46,6 +46,11 @@ public class TrabajadorServicio {
                     trabajador1.setNombre(trabajador.getNombre());
                     trabajador1.setApellido(trabajador.getApellido());
                     trabajador1.setEmail(trabajador.getEmail());
+                    if (trabajador1 instanceof Administrativo){
+                        ((Administrativo) trabajador1).setNumVentasTotales(((Administrativo) trabajador).getNumVentasTotales());
+                    } else {
+                        ((Comercial) trabajador1).setDepartamento(((Comercial) trabajador).getDepartamento());
+                    }
 
                     trabajadorRepository.save(trabajador1);
                 });
